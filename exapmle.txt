@@ -1,0 +1,8 @@
+# create network
+docker network create -d ipvlan --subnet x.x.x.x/mask --gateway x.x.x.x -o parent=ens160 -o mode=l2 net_ipvlan
+
+# example of build image
+docker build --label mysql -t biir_mysql .
+
+# run container
+docker container run --network net_ipvlan -p 3306:3306 --ip x.x.x.x -v xxx_biir_mysql:/usr/local/mysql/ --name xxx_biir_mysql -e MYSQL_ROOT_PASSWORD=xxx biir_mysql
